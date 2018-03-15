@@ -22,18 +22,17 @@ def getAuthors():
     """Return authors of the most popular articles of all time."""
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
-    c.execute("select name, count(path) as views from log, (select slug, name "
-              "from articles join authors on authors.id = articles.author) as "
-              "art where status like '200 OK' and char_length(path) > 1 and "
-              "replace(path, '/article/', '') = slug group by path, name order"
-              " by views DESC limit 3;")
+    c.execute("select au.name, count(*) AS views FROM log l INNER JOIN "
+              "articles a ON (path = '/article/' || a.slug)"
+              " INNER JOIN authors au ON au.id = a.author "
+              "GROUP BY au.name ORDER BY views DESC;")
     result = c.fetchall()
     db.close()
     return result
 
 
 def getPercentage():
-    """Return days where more than 1% of requests have errors."""
+    """Return days when more than 1% of requests have errors."""
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
     c.execute("select tb1.dayTotal as day, concat(round((tb2.error::decimal/"
