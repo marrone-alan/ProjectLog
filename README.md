@@ -3,7 +3,7 @@ This is a **log consult study project**. A project to show what was learned from
 It shows information about articles, authors and requests in a database.
 
 ## Programming language
-This program was written in _python_.
+This program was developed in _python_.
 _PostgreSQL was also used to show data.
 
 ## How to install python
@@ -26,7 +26,7 @@ When  ```vagrant up ``` ends, you will have your shell prompt back. You can use 
 
 ### Starting the database
 The PostgreSQL database server will automatically be started inside the VM. You can use the ```psql``` command-line tool to access and execute SQL statements.
-To load the data, use the psql -d news -f newsdata.sql command.
+To load data, use the psql -d news -f newsdata.sql command.
 *  ```psql``` - command line to PostgreSQL.
  ```-d news``` - connect to the database named **news**.
 *  ```-f newsdata.sql``` - executes the SQL statements in the newsdata.sql file.
